@@ -8,7 +8,7 @@
 SoftwareSerial BTSensor(11, 10);  // TX | RX
 Servo Servo1;
 auto timer = timer_create_default();
-Ultrasonic ultrasonic(3, 2);
+Ultrasonic ultrasonic(3, 4);
 
 char command = ' ';
 const int MOTOR_SWITCH = 8;
@@ -84,12 +84,12 @@ void handleCommands() {
       digitalWrite(MOTOR_SWITCH, LOW);
       break;
     case 'l':
-      Servo1.write(145);
+      Servo1.write(130);
       resetTurnLights();
       LEFT_BLINK_TIMER = timer.every(500, blink, (void *)LEFT_BLINK);
       break;
     case 'r':
-      Servo1.write(65);
+      Servo1.write(83);
       resetTurnLights();
       RIGHT_BLINK_TIMER = timer.every(500, blink, (void *)RIGHT_BLINK);
       break;
@@ -103,5 +103,5 @@ void loop() {
   handleBluetooth();
   handleTailLights();
   handleCommands();
-  /* handleAutoBreak(); */
+  handleAutoBreak();
 }
